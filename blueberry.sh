@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-
-cd $HOME/anti
-
 install() {
 		sudo apt-get update
 		sudo apt-get upgrade
@@ -65,7 +62,6 @@ elif [ "$1" = "update" ]; then
 	update
 	exit 1
 else
-	BlueBerryTeam
 	logo_play
 	red "BlueBerry Api Bot running..."
 	#sudo service redis-server restart
