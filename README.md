@@ -16,3 +16,12 @@ cd BlueBerryApi
 tmux
 screen ./blueberry.sh
 ```
+# Developers
+
+[SoliDev](https://t.me/SoliDev)
+
+[lucas](https://t.me/Deve_telegram)
+
+### Our Telegram channel:
+
+[BlueBerryTeam](https://t.me/BlueBerryTeam)
