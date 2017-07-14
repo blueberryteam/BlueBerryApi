@@ -14,6 +14,6 @@
 <span>./blueberry.sh install</span>
 <span>./blueberry.sh </span>
 
-<span> and autolaunch:</span>
+<span>#and autolaunch:</span>
 <span>screen ./launch.sh </span>
 </pre>
