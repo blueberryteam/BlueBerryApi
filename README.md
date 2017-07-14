@@ -5,54 +5,15 @@
 
 
 
-6
+
 </h3>
-
-
-
-7
-​
-
-
-
-8
 <pre>
+<span>git clone https://github.com/blueberryteam/BlueBerryApi.git</span>
+<span>cd  BlueBerryApi</span>
+<span>chmod 7777 ./blueberry.sh</span>
+<span>./blueberry.sh install</span>
+<span>./blueberry.sh </span>
 
-
-
-9
-<span>git clone https://github.com/SoHeil-R/LogoSticker.git</span>
-
-
-
-10
-<span>cd LogoSticker</span>
-
-
-
-11
-<span>chmod 7777 ./launch.sh</span>
-
-
-
-12
-<span>./launch.sh install</span>
-
-
-
-13
-<span> go to logosticker.py and set token,userchannel,sudoid</span>
-
-
-
-14
-<span>./launch.sh </span>
-
-
-
-15
-<span>autolaunch:</span>
-16
+<span> and autolaunch:</span>
 <span>screen ./launch.sh </span>
-17
 </pre>
