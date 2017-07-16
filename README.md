@@ -9,7 +9,7 @@ git clone https://github.com/blueberryteam/BlueBerryApi.git
 cd BlueBerryApi
 chmod +x blueberry.sh
 ./blueberry.sh install
-./blueBerry.sh
+./blueberry.sh
 
 # For Auto Launch:
 cd BlueBerryApi
