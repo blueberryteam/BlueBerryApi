@@ -1,6 +1,6 @@
 package.path = package.path..';.luarocks/share/lua/5.2/?.lua;.luarocks/share/lua/5.2/?/init.lua'
 package.cpath = package.cpath..';.luarocks/lib/lua/5.2/?.so'
-bot_token = "Token Bot"
+bot_token = "415695896:AAEBaWqM1Lw6SVSHQ-oksewXPFZ3ZlaTz7k" --Put You Token Here
 send_api = "https://api.telegram.org/bot"..bot_token
 sudo_id = 157059515
 require('./bot/methods')
@@ -133,27 +133,16 @@ function create_config( )
     "BlueBerry",
     "plugins"
     },
-    sudo_users = {428063598,311231963},--Sudo users
+    sudo_users = {311231963,428063598,SUDO_ID},--Sudo users
     admins = {},
     disabled_channels = {},
-    moderation = {data = ''..BeyondTeam..'/data/moderation.json'},
     info_text = [[*BlueBerry AntiSpam Bot V1*
-`AntiSpam BlueBerry` `based on` *BlueBerry AntiSpam*
-
-[Beyond Helper](https://github.com/BlueBerryTeam)
-
-*Admins :*
-*Founder & Developer :* [Lucas](Telegram.Me/DeVe_TeLeGrAm)
-_Developer & Sponser :_ [MAKAN](Telegram.Me/SoliDev)
-
-*》Special thanks to :*
-》[Admin (BlueBerryTeam)](Telegram.Me/BlueBerryTeam_Admin)
-
-*》Our channel :*
-》[BlueBerryTeam](Telegram.Me/BlueBerryTeam)
-
-*》Our Site :*
-》[BlueBerryTeam](BlueBerryTeam.ir)
+	*Programmer:* 
+	[SoliDev](t.me/solidev)
+	[lucas](t.me/deve_telegram)
+	*GitHub:*
+	github.com/blueberryteam/BlueBerryApi
+	Channel: [BlueBerryTeam](T.me/BlueBerryTeam)
 ]],
   }
   serialize_to_file(config, './data/config.lua')
