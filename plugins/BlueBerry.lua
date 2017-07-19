@@ -548,7 +548,7 @@ end
 			local bash = 'owners:'..msg.chat.id
 			if matches[2] and not msg.reply_to_message then
 				local user_id = matches[2]
-				if  redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+				if is_sudo1(user_id) then
      	        send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	        return false
 	             end
@@ -564,7 +564,7 @@ end
 			end
 		elseif not matches[2] and msg.reply_to_message then
 			local user_id = msg.reply_to_message.from.id
-			if redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+			if is_sudo1(user_id) then
      	    send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	    return false
 	        end
@@ -580,7 +580,7 @@ end
 			local bash = 'owners:'..msg.chat.id
 			if matches[2] and not msg.reply_to_message then
 				local user_id = matches[2]
-				if redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+				if is_sudo1(user_id) then
      	        send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	        return false
 	            end
@@ -592,7 +592,7 @@ end
 				end
 		elseif not matches[2] and msg.reply_to_message then
 			local user_id = msg.reply_to_message.from.id
-			if redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+			if is_sudo1(user_id) then
      	    send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	    return false
 	        end
@@ -608,7 +608,7 @@ end
 			local bash = 'mods:'..msg.chat.id
 			if matches[2] and not msg.reply_to_message then
 				local user_id = matches[2]
-				if is_sudo1(user_id) then
+			if redis:sismember('owners:'..msg.chat.id,user_id) or is_sudo1(user_id) then
              	send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	        return false
 	        end
@@ -620,7 +620,7 @@ end
 				end
 		elseif not matches[2] and msg.reply_to_message then
 			local user_id = msg.reply_to_message.from.id
-			if redis:sismember('owners:'..msg.chat.id,user_id) or redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+			if redis:sismember('owners:'..msg.chat.id,user_id) or is_sudo1(user_id) then
         	send_msg(msg.chat.id, ":|",msg.message_id, 'md')
          	return false
 	        end
@@ -636,7 +636,7 @@ end
 			local bash = 'mods:'..msg.chat.id
 			if matches[2] and not msg.reply_to_message then
 				local user_id = matches[2]
-				if redis:sismember('owners:'..msg.chat.id,user_id) or redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+			if redis:sismember('owners:'..msg.chat.id,user_id) or is_sudo1(user_id) then
      	        send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	        return false
 	            end
@@ -648,7 +648,7 @@ end
 				end
 		elseif not matches[2] and msg.reply_to_message then
 			local user_id = msg.reply_to_message.from.id
-			if redis:sismember('owners:'..msg.chat.id,user_id) or redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+			if redis:sismember('owners:'..msg.chat.id,user_id) or is_sudo1(user_id) then
      	    send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	    return false
 	         end
@@ -665,7 +665,7 @@ end
 			local bash = 'banneds:'..msg.chat.id
 			if matches[2] and not msg.reply_to_message then
 			local user_id = matches[2]
-		if redis:sismember('mods:'..msg.chat.id,user_id) or redis:sismember('owners:'..msg.chat.id,user_id) or redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+		if redis:sismember('mods:'..msg.chat.id,user_id) or redis:sismember('owners:'..msg.chat.id,user_id) or is_sudo1(user_id) then
      	send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	return false
 	        end
@@ -679,7 +679,7 @@ end
 				end
 		elseif not matches[2] and msg.reply_to_message then
 			local user_id = msg.reply_to_message.from.id
-		if redis:sismember('mods:'..msg.chat.id,user_id) or redis:sismember('owners:'..msg.chat.id,user_id) or redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+		if redis:sismember('mods:'..msg.chat.id,user_id) or redis:sismember('owners:'..msg.chat.id,user_id) or is_sudo1(user_id) then
      	send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	return false
 	        end
@@ -697,7 +697,7 @@ end
 			local bash = 'banneds:'..msg.chat.id
 			if matches[2] and not msg.reply_to_message then
 				local user_id = matches[2]
-				if redis:sismember('mods:'..msg.chat.id,user_id) or redis:sismember('owners:'..msg.chat.id,user_id) or redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+		      if redis:sismember('mods:'..msg.chat.id,user_id) or redis:sismember('owners:'..msg.chat.id,user_id) or is_sudo1(user_id) then
              	send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	        return false
 	            end
@@ -711,7 +711,7 @@ end
 				end
 		elseif not matches[2] and msg.reply_to_message then
 			local user_id = msg.reply_to_message.from.id
-			if redis:sismember('mods:'..msg.chat.id,user_id) or redis:sismember('owners:'..msg.chat.id,user_id) or redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+		if redis:sismember('mods:'..msg.chat.id,user_id) or redis:sismember('owners:'..msg.chat.id,user_id) or is_sudo1(user_id) then
          	send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	     return false
 	        end
@@ -728,7 +728,7 @@ end
 	if matches[1]:lower() == "kick" and is_mod(msg) then
 			if matches[2] and not msg.reply_to_message then
 				local user_id = matches[2]
-		if redis:sismember('mods:'..msg.chat.id,user_id) or redis:sismember('owners:'..msg.chat.id,user_id) or redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+		if redis:sismember('mods:'..msg.chat.id,user_id) or redis:sismember('owners:'..msg.chat.id,user_id) or is_sudo1(user_id) then
      	send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	return false
 	        end
@@ -737,7 +737,7 @@ end
 					return "*User* `"..user_id.."` *added* `ban`" 
 		elseif not matches[2] and msg.reply_to_message then
 			local user_id = msg.reply_to_message.from.id
-		if redis:sismember('mods:'..msg.chat.id,user_id) or redis:sismember('owners:'..msg.chat.id,user_id) or redis:sismember('admins:',user_id) or is_sudo1(user_id) then
+		if redis:sismember('mods:'..msg.chat.id,user_id) or redis:sismember('owners:'..msg.chat.id,user_id) or is_sudo1(user_id) then
      	send_msg(msg.chat.id, ":|",msg.message_id, 'md')
     	return false
 	        end
@@ -844,8 +844,8 @@ return {
 "^[!/#](setfloodtime) (%d+)$",
 "^(https://telegram.me/joinchat/%S+)$",
 "^(https://t.me/joinchat/%S+)$",
+
 	},
 	run=run,
 	pre_process=pre_process
 }
---By: @BlueBerryTeam
