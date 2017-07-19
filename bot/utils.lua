@@ -24,6 +24,18 @@ function plugins_names( )
   return files
 end
 
+
+function is_sudo1(user_id)
+  local var = false
+  -- Check users id in config
+  for v,user in pairs(_config.sudo_users) do
+    if user == user_id then
+      var = true
+    end
+  end
+  return var
+end
+
 function is_sudo(msg)
   local var = false
   -- Check users id in config
