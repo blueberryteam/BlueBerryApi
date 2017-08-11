@@ -268,6 +268,67 @@ _Show Your rules Group_
 	]]
 	end
 -----------------------------------
+local function manager(msg)
+local text = '*Wlcome To BlueBerryApi Bot*'
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+   {text = "Go To Manager Group", callback_data="/lang"}
+},{   
+   {text = "close", callback_data="/close"}  
+    }
+ }
+    send_key(msg.chat.id, text, keyboard, msg.message_id, 'md')
+
+end
+-----------------------------------
+local function lang(msg)
+local text = '*Wlcome To Manager Group BlueBerryApi Bot*'
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+    {text = "GroupMod", callback_data="/groupmod"}
+	},{
+	{text = "Aboutًں“œ", callback_data="/dev"}
+  },{
+   {text = "Channelًں”–", url="https://t.me/BlueBerryTeam"}
+  },{
+   {text = "Close", callback_data="/close"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+end
+-----------------------------------
+local function Mod(msg)
+local text = 'Gap Info'
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+    {text = "Adminlist", callback_data="/admins"}, {text = "OwnerList", callback_data="/owners"}
+    },{
+    {text = "ModList", callback_data="/mods"},  {text = "BanList", callback_data="/banss"}
+    },{
+    {text = "Rules", callback_data="/rules"},  {text = "Link", callback_data="/links"}
+	},{
+   {text = "Back To Manager Group", callback_data="/lang"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+end
+-----------------------------------
+local function Creator(msg)
+local text = '*My Creator*'
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+    {text = "Soheil", url="https://t.me/So8eil"}, {text = "MrLucas", url="https://t.me/DeVe_TeLeGrAm"}
+},{
+   {text = "Backًں”™", callback_data="/groupmod"}, {text = "Home", callback_data="/lang"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+ end
+ -----------------------------------
 local function run(msg, matches)
 if matches[1] == "add" and is_sudo(msg) then
     if redis:sismember('adds:',msg.chat.id) then
@@ -298,6 +359,18 @@ end
 if matches[1] == "settings" and is_mod(msg) then
  return setting(msg)
 end
+if matches[1] == "manager" and is_mod(msg) then
+ return manager(msg)
+end
+if matches[1] == "/lang" and is_mod(msg) then
+ return lang(msg)
+end
+if matches[1] == "/groupmod" and is_mod(msg) then
+ return Mod(msg)
+end
+if matches[1] == "/dev" and is_mod(msg) then
+ return Creator(msg)
+end
 if matches[1] == "help" and is_mod(msg) then
  return Help(msg)
 end
@@ -315,7 +388,7 @@ end
 end
  if matches[1] == "setfloodtime" and is_owner(msg) then
     if tonumber(matches[2]) < 1 or tonumber(matches[2]) > 200 then
-      send_msg(msg.chat.id, "ط¹_Wrong number, range is_ *[2-200]*",msg.message_id, 'md')
+      send_msg(msg.chat.id, "_Wrong number, range is_ *[2-200]*",msg.message_id, 'md')
 	  return false
 end
     redis:hset("setfloodtime",msg.chat.id,matches[2])
@@ -338,21 +411,21 @@ if matches[1]:lower() == "setrules" and is_mod(msg) then
 		if matches[1]:lower() == "link" and is_mod(msg) then
             local link = redis:get("grouplink"..msg.chat.id)
             if link then
-                return "لینک گروه :\n[کلیک کنید "..msg.chat.title.." برای ورود به گروه]("..link..")"
+                return "ظ„غŒظ†ع© ع¯ط±ظˆظ‡ :\n[ع©ظ„غŒع© ع©ظ†غŒط¯ "..msg.chat.title.." ط¨ط±ط§غŒ ظˆط±ظˆط¯ ط¨ظ‡ ع¯ط±ظˆظ‡]("..link..")"
             else
-                return 'لینک گروه هنوز ذخیره نشده است ! \n لطفا با دستور /setlink آن را ذخیره کنید'
+                return 'ظ„غŒظ†ع© ع¯ط±ظˆظ‡ ظ‡ظ†ظˆط² ط°ط®غŒط±ظ‡ ظ†ط´ط¯ظ‡ ط§ط³طھ ! \n ظ„ط·ظپط§ ط¨ط§ ط¯ط³طھظˆط± /setlink ط¢ظ† ط±ط§ ط°ط®غŒط±ظ‡ ع©ظ†غŒط¯'
             end
           end
 		if matches[1]:lower() == "setlink" and is_mod(msg) then
 		     redis:set("grouplink"..msg.chat.id, 'waiting')
-              return 'لطفا لینک گروه را ارسال نمایید :'
+              return 'ظ„ط·ظپط§ ظ„غŒظ†ع© ع¯ط±ظˆظ‡ ط±ط§ ط§ط±ط³ط§ظ„ ظ†ظ…ط§غŒغŒط¯ :'
           end
 		if redis:get("grouplink"..msg.chat.id) == 'waiting' and is_mod(msg)then
         if msg.text:match("(https://telegram.me/joinchat/%S+)") or msg.text:match("(https://t.me/joinchat/%S+)") then
           local glink = msg.text:match("(https://telegram.me/joinchat/%S+)") or msg.text:match("(https://t.me/joinchat/%S+)")
           local hash = "grouplink"..msg.chat.id
           redis:set(hash,glink)
-            return 'لینک گروه ثبت شد'
+            return 'ظ„غŒظ†ع© ع¯ط±ظˆظ‡ ط«ط¨طھ ط´ط¯'
         end
       end
 ---------------------------
@@ -561,7 +634,7 @@ end
                     redis:sadd(bash,user_id)
 					return "*User* `"..user_id.."` *added* `to owners group`" 
 				end
-			end
+            end	
 		elseif not matches[2] and msg.reply_to_message then
 			local user_id = msg.reply_to_message.from.id
 			if is_sudo1(user_id) then
@@ -746,6 +819,7 @@ end
 				return "*User* "..user_id.." *added* ban" 
 		end
 	end
+	
 -----------------------------------------
 	if matches[1]:lower() == "ownerlist" and is_owner(msg)then
         local bash = 'owners:'..msg.chat.id
@@ -803,10 +877,347 @@ end
               end
 		    return text
           end 
+-----------------------------------------
+		  if matches[1] == '/owners' then
+        local bash = 'owners:'..msg.chat.id
+        local list = redis:smembers(bash)
+		text = "*Owner User list:*\n"
+		for k,v in pairs(list) do
+        local user_info = redis:hgetall('user:'..v)
+              if user_info and user_info.username then
+                local username = user_info.username
+                text = text..k.." - @"..username.." ["..v.."]\n"
+              else
+                text = text..k.." - "..v.."\n"
+              end
+            end
+            if #list == 0 then
+                text = "*Ownerlist is Empty !*"
+              end
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+    {text = "Clean", callback_data="/cleanowners"}
+},{ 
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+end
+if matches[1] == '/cleanowners' then
+redis:del('owners:'..msg.chat.id)
+   text = "*Ownerlist* _Cleaned up_"
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+  {text = "> Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+ end
+  if matches[1] == '/mods' then
+        local bash = 'mods:'..msg.chat.id
+        local list = redis:smembers(bash)
+		text = "*Mod User list:*\n"
+		for k,v in pairs(list) do
+        local user_info = redis:hgetall('user:'..v)
+              if user_info and user_info.username then
+                local username = user_info.username
+                text = text..k.." - @"..username.." ["..v.."]\n"
+              else
+                text = text..k.." - "..v.."\n"
+              end
+            end
+            if #list == 0 then
+                text = "*modlist is Empty !*"
+              end
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+    {text = "Clean", callback_data="/cleanmods"}
+},{ 
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+end
+if matches[1] == '/cleanmods' then
+redis:del('mods:'..msg.chat.id)
+   text = "*Modlist* _Cleaned up_"
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+ end
+   if matches[1] == '/banss' then
+       local bash = 'banneds:'..msg.chat.id
+        local list = redis:smembers(bash)
+		text = "*Ban User list:*\n"
+		for k,v in pairs(list) do
+        local user_info = redis:hgetall('user:'..v)
+              if user_info and user_info.username then
+                local username = user_info.username
+                text = text..k.." - @"..username.." ["..v.."]\n"
+              else
+                text = text..k.." - "..v.."\n"
+              end
+            end
+            if #list == 0 then
+                text = "*banlist is Empty !*"
+              end
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+    {text = "Clean", callback_data="/cleanbanss"}
+},{ 
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+end
+if matches[1] == '/cleanbanss' then
+redis:del('banneds:'..msg.chat.id)
+   text = "*Banlist* _Cleaned up_"
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+ end
+    if matches[1] == '/Filters' then
+        local hash = 'chat:'..msg.chat.id..':filters'
+            if hash then
+              local names = redis:hkeys(hash)
+                text = '*Filter Word List:*\n'
+              for i=1, #names do
+                text = text..'> '..names[i]..'\n'
+              end
+              if #names == 0 then
+                  text = "*Filterlist is Empty !*"
+              end
+			end
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+    {text = "Clean", callback_data="/cleanFilters"}
+},{ 
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+end
+if matches[1] == '/cleanFilters' then
+    redis:del('chat:'..msg.chat.id..':filters')
+	text = "*Filterlist* _Cleaned up_"
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+ end
+     if matches[1] == '/gpbanss' then
+       local bash = 'banall:'..msg.chat.id
+        local list = redis:smembers(bash)
+		text = "*Global banned list:*\n"
+		for k,v in pairs(list) do
+        local user_info = redis:hgetall('user:'..v)
+              if user_info and user_info.username then
+                local username = user_info.username
+                text = text..k.." - @"..username.." ["..v.."]\n"
+              else
+                text = text..k.." - "..v.."\n"
+              end
+            end
+            if #list == 0 then
+                text = "*gbanlist is Empty !*"
+              end
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+    {text = "Clean", callback_data="/cleangpbanss"}
+},{ 
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+end
+if matches[1] == '/cleangpbanss' then
+    redis:del('banall:'..msg.chat.id)
+	text = "*Banalllist* _Cleaned up_"
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+ end
+      if matches[1] == '/silents' then
+        local bash = 'silent:'..msg.chat.id
+        local list = redis:smembers(bash)
+		text = "*Silent User list*:\n"
+		for k,v in pairs(list) do
+        local user_info = redis:hgetall('user:'..v)
+              if user_info and user_info.username then
+                local username = user_info.username
+                text = text..k.." - @"..username.." ["..v.."]\n"
+              else
+                text = text..k.." - "..v.."\n"
+              end
+            end
+            if #list == 0 then
+                text = "*silentlist is Empty !*"
+              end
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+    {text = "Clean", callback_data="/cleansilents"}
+},{ 
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+end
+if matches[1] == '/cleansilents' then
+    redis:del('silent:'..msg.chat.id)
+	text = "*Silentlist* _Cleaned up_"
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+ end
+       if matches[1] == '/admins' then
+        local bash = 'admins:'..msg.chat.id
+        local list = redis:smembers(bash)
+		text = "*Admin User list:*\n"
+		for k,v in pairs(list) do
+        local user_info = redis:hgetall('user:'..v)
+              if user_info and user_info.username then
+                local username = user_info.username
+                text = text..k.." - @"..username.." ["..v.."]\n"
+              else
+                text = text..k.." - "..v.."\n"
+              end
+            end
+            if #list == 0 then
+                text = "*adminlist is Empty !*"
+              end
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+    {text = "Clean", callback_data="/cleanadminss"}
+},{ 
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+end
+if matches[1] == '/cleanadminss' then
+    redis:del('admins:'..msg.chat.id)
+	text = "*Adminlist* _Cleaned up_"
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+ end
+         if matches[1] == '/rules' then
+        local rules = redis:get("grouprules"..msg.chat.id)
+        if rules then
+            text = "Rules Group:\n"..rules
+        else
+            text = '*Default rules:*\n*1-* _Spam and Flood Prohibited_ \n*2-* _Send Link Prohibited_\n*3-* _Respect The Rules of the Group_'
+        end
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+    {text = "Clean", callback_data="/cleanrules"}
+},{ 
+    {text = "SetRules", callback_data="/setrules"}
+},{ 
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+end
+if matches[1] == '/cleanrules' then
+    redis:del('grouprules:'..msg.chat.id)
+	text = "*Rules* _Cleaned up_"
+	
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+ end
+        if matches[1] == '/links' then
+		local text = 'local link'
+           local link = redis:get("grouplink"..msg.chat.id)
+            if link then
+                text = "*Group link:*\n[Click Here To Join "..msg.chat.title.." ]("..link..")"
+            else
+                text = '_Link Not Set!_\n_set a link for group with using_ [/setlink]'
+            end
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+    {text = "Clean", callback_data="/cleanlinks"}
+},{ 
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+end
+if matches[1] == '/cleanlinks' then
+    redis:del('grouplink:'..msg.chat.id)
+	text = "*Link* _Cleaned up_"
+ keyboard = {} 
+ keyboard.inline_keyboard = {
+    {
+  {text = "Back", callback_data="/groupmod"}
+    }
+ }
+edit(msg.chat.id, msg.message_id, text, keyboard, "md")
+ end
 		end  
    
 return {
 	patterns ={
+'^###cb:(/lang)',
+'^###cb:(/groupmod)',
+'^###cb:(/dev)',
+'^###cb:(/owners)',
+'^###cb:(/cleanowners)',
+'^###cb:(/mods)',
+'^###cb:(/cleanmods)',
+'^###cb:(/banss)',
+'^###cb:(/cleanbans)',
+'^###cb:(/Filters)',
+'^###cb:(/cleanFilters)',
+'^###cb:(/gpbanss)',
+'^###cb:(/cleangpbanss)',
+'^###cb:(/silents)',
+'^###cb:(/cleanadmins)',
+'^###cb:(/admins)',
+'^###cb:(/cleanadminss)',
+'^###cb:(/links)',
+'^###cb:(/cleanlinks)',
+'^###cb:(/rules)',
+'^###cb:(/setrules)',
 "^[!/#](add)$",
 "^[!/#](rem)$",
 "^[!/#](id)$",
@@ -817,6 +1228,7 @@ return {
 "^[!/#](mute) (.*)$",
 "^[!/#](unmute) (.*)$",
 "^[!/#](settings)$",
+"^[!/#](manager)$",
 "^[!/#](ownerlist)$",
 "^[!/#](banlist)$",
 "^[!/#](modlist)$",
@@ -844,8 +1256,7 @@ return {
 "^[!/#](setfloodtime) (%d+)$",
 "^(https://telegram.me/joinchat/%S+)$",
 "^(https://t.me/joinchat/%S+)$",
-
-	},
+},
 	run=run,
 	pre_process=pre_process
 }
