@@ -119,6 +119,30 @@ if plugin.pre_process then
     end
   end
 end
+local function handle_inline_keyboards_cb(msg)
+  msg.text = '###cb:'..msg.data
+  msg.cb = true
+if msg.new_chat_member then
+msg.service = true
+msg.text = '###new_chat_member'
+end
+if msg.message then
+  msg.old_text = msg.message.text
+  msg.old_date = msg.message.date
+  msg.message_id = msg.message.message_id
+  msg.chat = msg.message.chat
+  msg.message_id = msg.message.message_id
+  msg.chat = msg.message.chat
+else -- if keyboard send via
+			msg.chat = {type = 'inline', id = msg.from.id, title = msg.from.first_name}
+	msg.message_id = msg.inline_message_id
+    end
+  msg.cb_id = msg.id
+  msg.date = os.time()
+  msg.message = nil
+  msg.target_id = msg.data:match('.*:(-?%d+)')
+  return get_var(msg)
+end
 -- Save the content of _config to config.lua
 function save_config( )
   serialize_to_file(_config, './data/config.lua')
